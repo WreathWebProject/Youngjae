@@ -203,6 +203,36 @@ details > ul {
 
 ////////////////////////////////////////////
 
+.list_container {
+  float: right;
+  position: absolute;
+  margin-right: 0px;
+}
+
+.list_element {
+  margin:1px;
+  text-align:left;
+  display:inline-block;
+}
+
+.list_element p {
+  text-align: center;
+}
+
+.list_element:hover .inner_div {
+  border-style: solid;
+  border-color: red;
+}
+
+.selected_cover
+{
+  position: absolute;
+  visibility: hidden;
+}
+
+
+
+///////////////////////////////////
 
 
 
@@ -228,6 +258,69 @@ details > ul {
             }
          });
       });
+      </script>
+
+      <script>
+        var total = 0;
+        parseInt(total);
+        var isSelected = new Array(16);
+        var fruitList = new Array();
+        isSelected.fill(0);
+        fruitList.fill(NULL);
+
+
+
+
+        function getPrice(selected_class, index) {
+          if(isSelected[index] == 0)
+          {
+            var cover = selected_class.getElementsByClassName('selected_cover');
+            cover[0].style.visibility="visible";
+  //          object.getElementsByClassName('selected_cover').style.visibility = "hidden";
+            var desc = selected_class.getElementsByClassName('inner_div');
+            desc[0].style.backgroundColor="pink";
+
+            var pricelist = selected_class.getElementsByClassName('price');
+            var price = pricelist[0].innerHTML.replace(/[^0-9]/g,'');
+            total+= parseInt(price);
+
+            var fruitInnerList = selected_class.getElementsByClassName('fruitname');
+            fruitList.push(fruitInnerList[0].innerHTML);
+
+            isSelected[index] = 1;
+
+          //  alert("total price " + total + " you bought: " + fruitList);
+          }
+          else {
+            var cover = selected_class.getElementsByClassName('selected_cover');
+            cover[0].style.visibility="hidden";
+  //          object.getElementsByClassName('selected_cover').style.visibility = "visible";
+            var desc = selected_class.getElementsByClassName('inner_div');
+            desc[0].style.backgroundColor="white";
+
+            var pricelist = selected_class.getElementsByClassName('price');
+            var price = pricelist[0].innerHTML.replace(/[^0-9]/g,'');
+            total-= parseInt(price);
+
+            var fruitInnerList = selected_class.getElementsByClassName('fruitname');
+            fruitList = fruitList.filter((element) => element != fruitInnerList[0].innerHTML);
+
+            isSelected[index] = 0;
+
+          //  alert("total price " + total + " you bought: " + fruitList);
+          }
+        }
+
+        function hoverProduct(selected_class, index) {
+          var cover = selected_class.getElementsByClassName('selected_cover');
+          cover[0].style.visibility="visible";
+        }
+
+        function outProduct(selected_class, index) {
+          var cover = selected_class.getElementsByClassName('selected_cover');
+          cover[0].style.visibility="hidden";
+        }
+
       </script>
   </head>
   <body>
@@ -263,5 +356,216 @@ details > ul {
       </details>
       <hr>
       </div>
+
+      <div class="list_container" width="100%">
+        <div class="list_element" width="200px" onclick="getPrice(this, 0)" onmouseover="hoverProduct(this,0)" onmouseout="outProduct(this,0)">
+          1<br>
+          <div class="inner_div">
+            <div class="selected_cover">
+                  <img src="selected.jpg" width=150em;>
+            </div>
+          <img src="apple.jpg" width=150em;>
+          <p class="fruitname">Apple</p>
+          <p class="price">5 $</p>
+        </div>
+        </div>
+
+        <div class="list_element" width="200px" onclick="getPrice(this, 1);"  onmouseover="hoverProduct(this,1)" onmouseout="outProduct(this,1)">
+          2<br>
+          <div class="inner_div">
+            <div class="selected_cover">
+                  <img src="selected.jpg" width=150em;>
+            </div>
+          <img src="banana.jpg" width=150em;>
+          <p class="fruitname">Banana</p>
+          <p class="price">6 $</p>
+        </div>
+        </div>
+
+        <div class="list_element" width="200px" onclick="getPrice(this, 2);" draggable="true"  onmouseover="hoverProduct(this,2)" onmouseout="outProduct(this,2)">
+          3<br>
+            <div class="inner_div">
+              <div class="selected_cover">
+                    <img src="selected.jpg" width=150em;>
+              </div>
+          <img src="pear.jpg" width=150em;>
+          <p class="fruitname">Pear</p>
+          <p class="price">4 $</p>
+            </div>
+        </div>
+
+
+        <div class="list_element" width="200px" onclick="getPrice(this, 3);"  onmouseover="hoverProduct(this,3)" onmouseout="outProduct(this,3)">
+          4<br>
+                <div class="inner_div">
+                  <div class="selected_cover">
+                        <img src="selected.jpg" width=150em;>
+                  </div>
+          <img src="lemon.jpg" width=150em;>
+          <p class="fruitname">Lemon</p>
+          <p class="price">10 $</p>
+        </div>
+      </div>
+    </div>
+
+      <!--  //////////////////////////////////////////   -->
+
+      <div class="list_container" width="100%">
+        <div class="list_element" width="200px" onclick="getPrice(this, 4);"  onmouseover="hoverProduct(this,4)" onmouseout="outProduct(this,4)">
+          5<br>
+          <div class="inner_div">
+            <div class="selected_cover">
+                  <img src="selected.jpg" width=150em;>
+            </div>
+          <img src="kiwi.jpg" width=150em;>
+          <p class="fruitname">Kiwi</p>
+          <p class="price">5 $</p>
+        </div>
+        </div>
+
+        <div class="list_element" width="200px" onclick="getPrice(this, 5);"  onmouseover="hoverProduct(this,5)" onmouseout="outProduct(this,5)">
+          6<br>
+          <div class="inner_div">
+            <div class="selected_cover">
+                  <img src="selected.jpg" width=150em;>
+            </div>
+          <img src="pineapple.jpg" width=150em;>
+          <p class="fruitname">Pineapple</p>
+          <p class="price">7 $</p>
+        </div>
+        </div>
+
+        <div class="list_element" width="200px" onclick="getPrice(this, 6);"  onmouseover="hoverProduct(this,6)" onmouseout="outProduct(this,6)">
+          7<br>
+            <div class="inner_div">
+              <div class="selected_cover">
+                    <img src="selected.jpg" width=150em;>
+              </div>
+          <img src="dragonfruit.jpg" width=150em;>
+          <p class="fruitname">Dragonfruit</p>
+          <p class="price">1 $</p>
+            </div>
+        </div>
+
+
+        <div class="list_element" width="200px" onclick="getPrice(this, 7);"  onmouseover="hoverProduct(this,7)" onmouseout="outProduct(this,7)">
+          8<br>
+                <div class="inner_div">
+                  <div class="selected_cover">
+                        <img src="selected.jpg" width=150em;>
+                  </div>
+          <img src="watermelon.jpg" width=150em;>
+          <p class="fruitname">Watermelon</p>
+          <p class="price">2 $</p>
+        </div>
+      </div>
+    </div>
+
+
+      <!--  //////////////////////////////////////////   -->
+      <div class="list_container" width="100%">
+        <div class="list_element" width="200px" onclick="getPrice(this, 8);"  onmouseover="hoverProduct(this,8)" onmouseout="outProduct(this,8)">
+          9<br>
+          <div class="inner_div">
+            <div class="selected_cover">
+                  <img src="selected.jpg" width=150em;>
+            </div>
+          <img src="melon.jpg" width=150em;>
+          <p class="fruitname">Melon</p>
+          <p class="price">3 $</p>
+        </div>
+        </div>
+
+        <div class="list_element" width="200px" onclick="getPrice(this, 9);"  onmouseover="hoverProduct(this,9)" onmouseout="outProduct(this,9)">
+          10<br>
+          <div class="inner_div">
+            <div class="selected_cover">
+                  <img src="selected.jpg" width=150em;>
+            </div>
+          <img src="mango.jpg" width=150em;>
+          <p class="fruitname">Mango</p>
+          <p class="price">4 $</p>
+        </div>
+        </div>
+
+        <div class="list_element" width="200px" onclick="getPrice(this, 10);"  onmouseover="hoverProduct(this,10)" onmouseout="outProduct(this,10)">
+          11<br>
+            <div class="inner_div">
+              <div class="selected_cover">
+                    <img src="selected.jpg" width=150em;>
+              </div>
+          <img src="grape.jpg" width=150em;>
+          <p class="fruitname">Grape</p>
+          <p class="price">5 $</p>
+            </div>
+        </div>
+
+
+        <div class="list_element" width="200px" onclick="getPrice(this, 11);"  onmouseover="hoverProduct(this,11)" onmouseout="outProduct(this,11)">
+          12<br>
+                <div class="inner_div">
+                  <div class="selected_cover">
+                        <img src="selected.jpg" width=150em;>
+                  </div>
+          <img src="orange.jpg" width=150em;>
+          <p class="fruitname">Orange</p>
+          <p class="price">6 $</p>
+        </div>
+      </div>
+    </div>
+
+      <!--  //////////////////////////////////////////   -->
+
+      <div class="list_container" width="100%">
+        <div class="list_element" width="200px" onclick="getPrice(this, 12);"  onmouseover="hoverProduct(this,12)" onmouseout="outProduct(this,12)">
+          13<br>
+          <div class="inner_div">
+            <div class="selected_cover">
+                  <img src="selected.jpg" width=150em;>
+            </div>
+          <img src="pomegranate.jpg" width=150em;>
+          <p class="fruitname">Pomegranate</p>
+          <p class="price">7 $</p>
+        </div>
+        </div>
+
+        <div class="list_element" width="200px" onclick="getPrice(this, 13);"  onmouseover="hoverProduct(this,13)" onmouseout="outProduct(this,13)">
+          14<br>
+          <div class="inner_div">
+            <div class="selected_cover">
+                  <img src="selected.jpg" width=150em;>
+            </div>
+          <img src="avocado.jpg" width=150em;>
+          <p class="fruitname">Avocado</p>
+          <p class="price">8 $</p>
+        </div>
+        </div>
+
+        <div class="list_element" width="200px" onclick="getPrice(this, 14);"  onmouseover="hoverProduct(this,14)" onmouseout="outProduct(this,14)">
+          15<br>
+            <div class="inner_div">
+              <div class="selected_cover">
+                    <img src="selected.jpg" width=150em;>
+              </div>
+          <img src="durian.jpg" width=150em;>
+          <p class="fruitname">Durian</p>
+          <p class="price">9 $</p>
+            </div>
+        </div>
+
+
+        <div class="list_element" width="200px" onclick="getPrice(this, 15);"  onmouseover="hoverProduct(this,15)" onmouseout="outProduct(this,15)">
+          16<br>
+                <div class="inner_div">
+                  <div class="selected_cover">
+                        <img src="selected.jpg" width=150em;>
+                  </div>
+          <img src="tomato.jpg" width=150em;>
+          <p class="fruitname">Tomato</p>
+          <p class="price">10 $</p>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>
